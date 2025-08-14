@@ -12,9 +12,42 @@
   />
 </svelte:head>
 
-<h1>musictools</h1>
+<article class="wrapper">
+  <section class="notetohz">
+    <Notetohz />
+  </section>
+  <section class="metronome">
+    <Metronome />
+  </section>
+  <section class="rhymes">
+    <Rhymes />
+  </section>
+  <section class="bpmtoms">
+    <Bpmtoms />
+  </section>
+</article>
 
-<Notetohz />
-<Metronome />
-<Bpmtoms />
-<Rhymes />
+<style>
+  article.wrapper {
+    margin: 0 auto;
+    padding: 16px 0px;
+    box-sizing: border-box;
+    width: 1152px;
+    display: grid;
+    grid-template-columns: repeat(3, 384px);
+  }
+
+  section.notetohz {
+    width: 384px;
+  }
+  section.metronome {
+    width: 384px;
+  }
+  section.rhymes {
+    width: 384px;
+  }
+  section.bpmtoms {
+    width: calc(384 * 3px);
+    grid-column: 1 / 3;
+  }
+</style>
