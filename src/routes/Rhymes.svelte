@@ -64,14 +64,13 @@
   input {
     width: 128px;
   }
-  div.output {
-    margin-top: 16px;
-  }
   div.controls {
     width: 100%;
+    margin-bottom: 16px;
     background: black;
-    position: sticky;
-    top: 0;
-    left: 0;
+  }
+  div.output {
+    height: 255px;
+    overflow-y: scroll;
   }
 </style>

@@ -14,55 +14,81 @@
 
 <article class="wrapper">
   <section class="notetohz">
-    <Notetohz />
+    <fieldset>
+      <legend>Covert note to HZ: </legend>
+      <Notetohz />
+    </fieldset>
   </section>
   <section class="metronome">
-    <Metronome />
+    <fieldset>
+      <legend>Metronome: </legend>
+      <Metronome />
+    </fieldset>
   </section>
   <section class="rhymes">
-    <Rhymes />
+    <fieldset>
+      <legend>Rhymebrain: </legend>
+      <Rhymes />
+    </fieldset>
   </section>
   <section class="bpmtoms">
-    <Bpmtoms />
+    <fieldset>
+      <legend>BPM subdivisions: </legend>
+      <Bpmtoms />
+    </fieldset>
   </section>
   <section class="links">
-    <ul>
-      <li>
-        <a href="https://www.hooktheory.com/trends" target="_blank"
-          >hooktheory</a
-        >
-      </li>
-      <li>
-        <a href="https://www.scales-chords.com/chordid.php" target="_blank"
-          >chordtools</a
-        >
-      </li>
-    </ul>
+    <fieldset>
+      <legend>External links: </legend>
+      <ul>
+        <li>
+          <a href="https://www.hooktheory.com/trends" target="_blank"
+            >hooktheory</a
+          >
+        </li>
+        <li>
+          <a href="https://www.scales-chords.com/chordid.php" target="_blank"
+            >chordtools</a
+          >
+        </li>
+      </ul>
+    </fieldset>
   </section>
 </article>
 
 <style>
+  fieldset {
+    box-sizing: border-box;
+    padding: 0px 16px;
+    padding-bottom: 16px;
+    border: 1px solid white;
+    border-radius: 3px;
+    margin-bottom: 0;
+    height: 100%;
+  }
+  legend {
+    width: unset;
+    margin-bottom: 8px;
+  }
+
   article.wrapper {
-    margin: 0 auto;
+    margin: 0 16px;
     padding: 16px 0px;
     box-sizing: border-box;
-    width: 1152px;
     display: grid;
-    grid-template-columns: repeat(3, 384px);
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 16px;
+    column-gap: 16px;
   }
 
   section.notetohz,
   section.metronome,
-  section.rhymes {
-    width: 384px;
-    height: 291px;
-  }
-  section.rhymes {
-    overflow-y: scroll;
-    position: relative;
+  section.rhymes,
+  section.links,
+  section.bpmtoms {
+    align-self: stretch;
   }
   section.bpmtoms {
-    width: calc(384 * 2px);
     grid-column: 1 / 3;
   }
   section.links {
