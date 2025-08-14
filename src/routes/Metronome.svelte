@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
+  import { bpm } from "./bpm.svelte";
 
-  let bpm = 100;
   let beatsPerBar = 4;
   let currentBeat = 1;
   let isRunning = false;
@@ -18,7 +18,7 @@
   let scheduleAheadTime = 0.1; // s: how far ahead to schedule
   let nextNoteTime = 0; // s: when the next note is due
   let schedulerId = null; // for setInterval
-  let beatLength = 60 / bpm; // seconds per beat
+  let beatLength = 60 / bpm.currentBpm; // seconds per beat
 
   let beatCounter = 1;
 
@@ -49,7 +49,7 @@
   }
 
   function nextNote() {
-    beatLength = 60 / bpm;
+    beatLength = 60 / bpm.currentBpm;
     nextNoteTime += beatLength;
     beatCounter = (beatCounter % beatsPerBar) + 1;
   }
@@ -102,12 +102,15 @@
       }
       const avgInterval =
         intervals.reduce((a, b) => a + b, 0) / intervals.length;
-      bpm = Math.min(240, Math.max(40, Math.round(60000 / avgInterval)));
+      bpm.currentBpm = Math.min(
+        240,
+        Math.max(40, Math.round(60000 / avgInterval))
+      );
     }
   }
 
   function adjustBpm(change) {
-    bpm = Math.min(240, Math.max(40, bpm + change));
+    bpm.currentBpm = Math.min(240, Math.max(40, bpm.currentBpm + change));
   }
 
   onDestroy(() => {
@@ -117,11 +120,11 @@
 </script>
 
 <label>
-  BPM: {bpm}
+  BPM: {bpm.currentBpm}
   <div>
     <button on:click={(e) => adjustBpm(e.shiftKey ? -5 : -1)}>-</button>
 
-    <input type="range" min="40" max="240" bind:value={bpm} />
+    <input type="range" min="40" max="240" bind:value={bpm.currentBpm} />
 
     <button on:click={(e) => adjustBpm(e.shiftKey ? 5 : 1)}>+</button>
   </div>

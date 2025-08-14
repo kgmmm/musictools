@@ -1,5 +1,6 @@
 <script>
-  let tempo = 120;
+  import { bpm } from "./bpm.svelte";
+
   let noteType = "straight";
 
   const noteFractions = [
@@ -11,7 +12,7 @@
     { label: "1/32", factor: 0.03125 },
   ];
 
-  const msPerBeat = () => (60 / tempo) * 1000;
+  const msPerBeat = () => (60 / bpm.currentBpm) * 1000;
 
   const duration = (fraction) => {
     let baseMs = msPerBeat() * (fraction / 0.25);
@@ -26,11 +27,6 @@
     return label;
   };
 </script>
-
-<label>
-  BPM:
-  <input type="number" bind:value={tempo} min="1" />
-</label>
 
 <div>
   <label>
