@@ -37,14 +37,15 @@
     grid-template-columns: repeat(3, 384px);
   }
 
-  section.notetohz {
-    width: 384px;
-  }
-  section.metronome {
-    width: 384px;
-  }
+  section.notetohz,
+  section.metronome,
   section.rhymes {
     width: 384px;
+    height: 291px;
+  }
+  section.rhymes {
+    overflow-y: scroll;
+    position: relative;
   }
   section.bpmtoms {
     width: calc(384 * 3px);

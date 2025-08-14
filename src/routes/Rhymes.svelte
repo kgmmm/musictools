@@ -34,30 +34,44 @@
   }
 </script>
 
-<input
-  bind:value={inputWord}
-  placeholder="Enter a word..."
-  on:keydown={(e) => e.key === "Enter" && fetchRhymes()}
-/>
+<div class="controls">
+  <input
+    bind:value={inputWord}
+    placeholder="Enter a word..."
+    on:keydown={(e) => e.key === "Enter" && fetchRhymes()}
+  />
 
-<button on:click={fetchRhymes} disabled={loading}>
-  {loading ? "Loading..." : "Find Rhymes"}
-</button>
+  <button on:click={fetchRhymes} disabled={loading}>
+    {loading ? "Loading..." : "Find Rhymes"}
+  </button>
+</div>
 
-{#if error}
-  <p style="color: red;">Error: {error}</p>
-{:else if rhymes.length}
-  <ul>
-    {#each rhymes as rhyme}
-      <li>{rhyme.word} (score: {rhyme.score})</li>
-    {/each}
-  </ul>
-{:else if hasSearched && !loading && rhymes.length === 0}
-  <p>No rhymes found.</p>
-{/if}
+<div class="output">
+  {#if error}
+    <p style="color: red;">Error: {error}</p>
+  {:else if rhymes.length}
+    <ul>
+      {#each rhymes as rhyme}
+        <li>{rhyme.word} (score: {rhyme.score})</li>
+      {/each}
+    </ul>
+  {:else if hasSearched && !loading && rhymes.length === 0}
+    <p>No rhymes found.</p>
+  {/if}
+</div>
 
 <style>
   input {
     width: 128px;
+  }
+  div.output {
+    margin-top: 16px;
+  }
+  div.controls {
+    width: 100%;
+    background: black;
+    position: sticky;
+    top: 0;
+    left: 0;
   }
 </style>
