@@ -25,6 +25,20 @@
   <section class="bpmtoms">
     <Bpmtoms />
   </section>
+  <section class="links">
+    <ul>
+      <li>
+        <a href="https://www.hooktheory.com/trends" target="_blank"
+          >hooktheory</a
+        >
+      </li>
+      <li>
+        <a href="https://www.scales-chords.com/chordid.php" target="_blank"
+          >chordtools</a
+        >
+      </li>
+    </ul>
+  </section>
 </article>
 
 <style>
@@ -48,7 +62,15 @@
     position: relative;
   }
   section.bpmtoms {
-    width: calc(384 * 3px);
+    width: calc(384 * 2px);
     grid-column: 1 / 3;
+  }
+  section.links {
+    grid-column: 3 / 3;
+    grid-row: 2 / 2;
+  }
+
+  ul {
+    margin-top: 16px;
   }
 </style>

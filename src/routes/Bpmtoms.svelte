@@ -60,11 +60,12 @@
 <style>
   table {
     text-align: center;
+    width: 100%;
   }
   th,
   td {
     box-sizing: border-box;
-    min-width: 128px;
+    width: calc(100% / 6);
     height: 24px;
   }
 </style>
