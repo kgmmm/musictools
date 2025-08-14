@@ -58,25 +58,13 @@
 </table>
 
 <style>
-  input[type="number"] {
-    width: 80px;
-    margin-left: 0.5rem;
-  }
   table {
-    text-align: right;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    text-align: center;
   }
   th,
   td {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-  }
-  th {
-    text-align: center;
-    font-size: 1.1rem;
-  }
-  td {
-    text-align: center;
+    box-sizing: border-box;
+    min-width: 128px;
+    height: 24px;
   }
 </style>

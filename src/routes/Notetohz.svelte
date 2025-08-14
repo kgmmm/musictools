@@ -48,9 +48,9 @@
   );
 </script>
 
-<label>
+<label for="note">
   Filter by Note:&nbsp;
-  <select bind:value={selectedNote}>
+  <select bind:value={selectedNote} id="note">
     {#each uniqueNoteNames as name}
       <option value={name}>{name}</option>
     {/each}
@@ -76,24 +76,12 @@
 
 <style>
   table {
-    border-collapse: collapse;
-    margin-top: 1rem;
+    text-align: left;
   }
-
   th,
   td {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-  }
-  td:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-  tr:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  th {
-    color: #555;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    min-width: 128px;
+    height: 24px;
   }
 </style>

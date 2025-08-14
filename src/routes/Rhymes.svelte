@@ -36,7 +36,7 @@
 
 <input
   bind:value={inputWord}
-  placeholder="Enter a word to find rhymes..."
+  placeholder="Enter a word..."
   on:keydown={(e) => e.key === "Enter" && fetchRhymes()}
 />
 
@@ -55,3 +55,9 @@
 {:else if hasSearched && !loading && rhymes.length === 0}
   <p>No rhymes found.</p>
 {/if}
+
+<style>
+  input {
+    width: 128px;
+  }
+</style>

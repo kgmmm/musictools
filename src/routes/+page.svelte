@@ -5,9 +5,16 @@
   import Metronome from "./Metronome.svelte";
 </script>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://fixedsys.javanile.org/css/fixedsys-dark.css"
+  />
+</svelte:head>
+
 <h1>musictools</h1>
 
 <Notetohz />
-<Rhymes />
-<Bpmtoms />
 <Metronome />
+<Bpmtoms />
+<Rhymes />
