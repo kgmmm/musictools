@@ -9,6 +9,7 @@
   let tapTimes = [];
 
   let audioCtx;
+
   onMount(() => {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   });
@@ -23,6 +24,8 @@
   let beatCounter = 1;
 
   let uiTimeouts = [];
+
+  let isPressed = false;
 
   function playClick(emphasized = false, time = 0) {
     const osc = audioCtx.createOscillator();
@@ -119,50 +122,121 @@
   });
 </script>
 
-<label>
-  BPM: {bpm.currentBpm}
-  <div>
+<main>
+  <h1>
+    <a
+      href={null}
+      on:click={tapTempo}
+      on:mousedown={() => (isPressed = true)}
+      on:mouseup={() => (isPressed = false)}
+      on:mouseleave={() => (isPressed = false)}
+      class:touched={isPressed}>{bpm.currentBpm}</a
+    >
+  </h1>
+
+  <div class="bpmControls">
     <button on:click={(e) => adjustBpm(e.shiftKey ? -5 : -1)}>-</button>
 
     <input type="range" min="40" max="240" bind:value={bpm.currentBpm} />
 
     <button on:click={(e) => adjustBpm(e.shiftKey ? 5 : 1)}>+</button>
   </div>
-</label>
 
-<div class="indicators" style="grid-template-rows:{beatsPerBar}">
-  {#each Array(beatsPerBar) as _, i}
-    <div class="indicator" class:active={currentBeat === i + 1}>
-      {i + 1}
-    </div>
-  {/each}
-</div>
+  <div class="indicators">
+    {#each Array(beatsPerBar) as _, i}
+      <div class="indicator" class:active={currentBeat === i + 1}>
+        {i + 1}
+      </div>
+    {/each}
+  </div>
 
-<label>
-  Beats per Bar: {beatsPerBar}
-  <input type="range" min="1" max="12" bind:value={beatsPerBar} />
-</label>
+  <div class="perBar">
+    <input type="range" min="1" max="12" bind:value={beatsPerBar} />
+  </div>
 
-<div>
-  <button on:click={toggleMetronome}>
-    {isRunning ? "Stop" : "Start"}
-  </button>
+  <div class="buttons">
+    <button on:click={toggleMetronome}>
+      {isRunning ? "Stop" : "Start"}
+    </button>
 
-  <button on:click={tapTempo}> Tap Tempo </button>
-</div>
+    <button on:click={tapTempo}> Tap Tempo </button>
+  </div>
+</main>
 
 <style>
+  main {
+    width: 100%;
+    min-width: 384px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 128px !important;
+  }
+  h1 > a {
+    font-size: unset !important;
+    user-select: none;
+    cursor: pointer;
+  }
+  h1 > a.touched {
+    color: white;
+  }
+
+  div.bpmControls {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 24px auto 24px;
+    padding-bottom: 16px;
+  }
+  div.bpmControls > button {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  div.bpmControls > input {
+    margin-inline: 16px;
+    width: calc(100% - 32px);
+  }
+
   div.indicators {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
   }
   div.indicator {
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    background: lightblue;
+    width: 24px;
+    height: 24px;
+    background: white;
     float: left;
+    color: black;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    user-select: none;
   }
   div.indicator.active {
-    background: lightseagreen;
+    background: #61d6d6;
+  }
+
+  div.perBar {
+    display: grid;
+    place-items: center;
+    padding-bottom: 16px;
+  }
+  div.perBar > input {
+    width: 100%;
+  }
+
+  div.buttons {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 50% 50%;
+  }
+  div.buttons > button {
+    height: 32px;
+    width: 100%;
+    cursor: pointer;
   }
 </style>
